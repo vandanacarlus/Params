@@ -1,0 +1,59 @@
+https://codesandbox.io/s/mystifying-cdn-jpo4k1?file=/src/App.js
+
+App.js
+import "./styles.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Param from "./Param";
+import Demo from "./Demo";
+import { useEffect } from "react";
+
+export default function App() {
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all")
+      .then((res) => res.json())
+      .then((resu) => {
+        console.log(resu);
+      });
+  }, []);
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Demo />} />
+          <Route path="/page/:num" element={<Param />} />
+        </Routes>
+      </Router>
+    </>
+  );
+}
+  
+  
+  
+  another file Demo.js
+  
+  
+  const Demo = () => {
+  return <div>DEMO</div>;
+};
+export default Demo;
+
+
+another file Param.js
+
+import {
+  BrowserRouter as Router,
+  useParams,
+  Routes,
+  Route
+} from "react-router-dom";
+
+const Param = () => {
+  const { num } = useParams();
+  return (
+    <>
+      <p>{num}</p>
+    </>
+  );
+};
+export default Param;
+
